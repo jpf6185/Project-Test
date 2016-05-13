@@ -27,6 +27,11 @@ public class ConnectFive extends JFrame implements ActionListener
    JButton jbNine = null;
    JPanel jpCenter = null;
    
+   String ipAddress = "";
+   JLabel connectServer = null;
+   JTextField serverIP = null;
+   JButton connectToServer = null;
+   
    private static int redWins = 0;
    private static int blueWins = 0;
    private int placedPieces = 0;
@@ -52,6 +57,22 @@ public class ConnectFive extends JFrame implements ActionListener
     */
    public ConnectFive()
    { 
+      connectServer = new JLabel("Connect to server: ");
+      serverIP = new JTextField(25);
+      connectToServer = new JButton("Connect");
+      
+      JFrame connection = new JFrame();
+      
+      connection.setLayout( new FlowLayout(FlowLayout.CENTER));
+      connection.add(connectServer);
+      connection.add(serverIP);
+      connection.add(connectToServer);
+      connectToServer.addActionListener(this);
+            
+      connection.setVisible(true);
+      connection.setLocationRelativeTo(null);
+      connection.setSize(500, 100);
+   
       setLayout(new BorderLayout());
       
       jpCenter = new JPanel();
@@ -115,7 +136,7 @@ public class ConnectFive extends JFrame implements ActionListener
         jfMain.setSize(700, 700);
         jfMain.setLocationRelativeTo( null );		
         jfMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jfMain.setVisible(true);
+        jfMain.setVisible(false);
    }
    
    /**
@@ -173,6 +194,10 @@ public class ConnectFive extends JFrame implements ActionListener
       else if(cmd.equalsIgnoreCase("Nine"))
       {
          buttonNine();       
+      }
+      else if(cmd.equalsIgnoreCase("Connect"))
+      {
+         buttonConnect();
       }
 
       placedPieces++;
@@ -413,7 +438,15 @@ public class ConnectFive extends JFrame implements ActionListener
          }
          else currentPlayer = 'r'; 
     }
-   
+    
+    public void buttonConnect()
+    {
+      //serverIP is the JTextField
+      ipAddress = serverIP.getText();
+      
+      
+    }
+     
     /**
      * Class ConnectFiveBackEnd will be used in order to check for a win condition after a move is made as well as store the information in the
      * 2D array as to what moves have been made
@@ -438,7 +471,7 @@ public class ConnectFive extends JFrame implements ActionListener
       {
          try
          {
-            InetAddress server = InetAddress.getByName("localhost");
+            InetAddress server = InetAddress.getByName(ipAddress);
             Socket clientSocket = new Socket(server, 36852);
             oos = new ObjectOutputStream(clientSocket.getOutputStream());
             oos.flush();
@@ -665,7 +698,7 @@ public class ConnectFive extends JFrame implements ActionListener
                      }
                      else if(temp.getNextPlayer() == 'w')
                      {
-                        ConnectFive.win(currentPlayer);//testing githubs
+                        ConnectFive.win(currentPlayer);
                      }
                      else
                      {
