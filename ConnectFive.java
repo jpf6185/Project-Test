@@ -58,7 +58,9 @@ public class ConnectFive extends JFrame implements ActionListener
    // stuff for chat client
    private JButton jbSetUserName=new JButton("Set User Name"); 
    private JTextArea jtaChat=new JTextArea(25, 15);
-   private JTextArea jtasend=new JtextArea(3,15);
+   private JTextArea jtasend=new JTextArea(3,15);
+   private JTextField jtfName=new JTextField(20);
+   private JButton jbSend=new JButton("send");
    /**
     * Constructor for Connect Five game. Sets up GUI, and sets all spots to default color
     */
@@ -114,6 +116,14 @@ public class ConnectFive extends JFrame implements ActionListener
          jpCenter.add(spot);
          slots.add(spot);
       }
+      JPanel jpChat=new JPanel(new BorderLayout());
+      JPanel jpName=new JPanel(new FlowLayout(FlowLayout.CENTER));
+      jpName.add(new JLabel("Set UserName:"));
+      jpName.add(jtfName);
+      jpName.add(jbSetUserName);
+      jpChat.add(jpName);
+      add(jpChat , BorderLayout.EAST);
+      
    }
    
    /**
@@ -124,7 +134,7 @@ public class ConnectFive extends JFrame implements ActionListener
         ConnectFive jfMain = new ConnectFive();
         jfMain.getContentPane().setBackground(new Color(0xFEFFE2));
         jfMain.setTitle("Connect Five");
-        jfMain.setSize(700, 700);
+        jfMain.setSize(1200, 700);
         jfMain.setLocationRelativeTo( null );		
         jfMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jfMain.setVisible(true);
