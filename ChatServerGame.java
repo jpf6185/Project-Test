@@ -9,7 +9,7 @@ import java.util.*;
  *A class that creates a server to maintain a group chat
  *
  *@author Ryan Sweeney
- *@version 4/17/16
+ *@version 5/13/16
  */
 public class ChatServerGame extends JFrame
 {
