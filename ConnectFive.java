@@ -8,15 +8,6 @@ import java.util.*;
 import java.net.*;
 
 
-         
-// 
-//    JButton jbSetUserName = null;
-//    JButton jbSend = null;  
-//    
-//          //Adding chatgui here <---
-//       //Need to first create a username and then it will pop up the game and chat
-//       jbSetUserName = new JButton("Set User Name");
-//       jbSend = new JButton("send");
  /**
   * Class ConnectFive is the main interface for the connect five gui.
   *
@@ -674,7 +665,7 @@ public class ConnectFive extends JFrame implements ActionListener
                      }
                      else if(temp.getNextPlayer() == 'w')
                      {
-                        ConnectFive.win(currentPlayer);
+                        ConnectFive.win(currentPlayer);//testing githubs
                      }
                      else
                      {
