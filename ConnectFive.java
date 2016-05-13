@@ -51,11 +51,14 @@ public class ConnectFive extends JFrame implements ActionListener
    private static final int SLOTS = 81;
    private static final int ROWS = 9;
    private static final int COL = 9;
-   
+   // adds
    ArrayList<Slot> slots = new ArrayList<Slot>();
    
    ConnectFiveBackEnd backEnd = new ConnectFiveBackEnd();
-   
+   // stuff for chat client
+   private JButton jbSetUserName=new JButton("Set User Name"); 
+   private JTextArea jtaChat=new JTextArea(25, 15);
+   private JTextArea jtasend=new JtextArea(3,15);
    /**
     * Constructor for Connect Five game. Sets up GUI, and sets all spots to default color
     */
