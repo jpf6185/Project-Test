@@ -83,6 +83,8 @@ public class ConnectFive extends JFrame implements ActionListener
       connection.setVisible(true);
       connection.setLocationRelativeTo(null);
       connection.setSize(500, 100);
+      connection.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
                                         //Connection GUI ends
       setLayout(new BorderLayout());
       
