@@ -193,56 +193,70 @@ public class ConnectFive extends JFrame implements ActionListener
     */
    public void actionPerformed(ActionEvent e)
    {
-                String cmd = e.getActionCommand();
+      String cmd = e.getActionCommand();
       
       if(cmd.equalsIgnoreCase("One"))
       {
          buttonOne();
+         placedPieces++;
       }
       else if(cmd.equalsIgnoreCase("Two"))
       {
          buttonTwo();
+         placedPieces++;
       }
       else if(cmd.equalsIgnoreCase("Three"))
       {
          buttonThree();
+         placedPieces++;
       }
       else if(cmd.equalsIgnoreCase("Four"))
       {
          buttonFour();
+         placedPieces++;
       }
       else if(cmd.equalsIgnoreCase("Five"))
       {
          buttonFive();
+         placedPieces++;
       }
       else if(cmd.equalsIgnoreCase("Six"))
       {
          buttonSix();
+         placedPieces++;
       }
       else if(cmd.equalsIgnoreCase("Seven"))
       {
          buttonSeven();
+         placedPieces++;
       }
       else if(cmd.equalsIgnoreCase("Eight"))
       {
          buttonEight();
+         placedPieces++;
       }
       else if(cmd.equalsIgnoreCase("Nine"))
       {
-         buttonNine();       
+         buttonNine();
+         placedPieces++;       
       }
       else if(cmd.equalsIgnoreCase("Connect"))
       {
          buttonConnect();
+         placedPieces++;
       }
       else if(cmd.equalsIgnoreCase("set User Name")){
          name=jtfName.getText();
          jtaSend.setEnabled(true);
          jbSend.setEnabled(false);
       }
+      else if(cmd.equalsIgnoreCase("send")){
+         backEnd.sendString(name+jtaSend.getText());
+         jtaSend.setText("");
+      }
          
 
-      placedPieces++;
+      
       if(validOrWin == 2) //Checks if there is a winner
       {
          resetBoard('w');
@@ -510,6 +524,7 @@ public class ConnectFive extends JFrame implements ActionListener
       char currentPlayer = 'r';
       ObjectOutputStream oos = null;
       ObjectInputStream ois = null;
+      Object syn=new Object();
       
       /**
        * Constructor for Back End
@@ -541,6 +556,20 @@ public class ConnectFive extends JFrame implements ActionListener
          isConnected = true;
          Thread c5lt = new Thread(new C5ListenThread());
          c5lt.start();
+      }
+      /* Method to sends a String out from the chat part along with usersname
+      * Jacob Feiner
+      * 5/14/16
+      */
+      public void sendString (String s){
+         try{
+            oos.writeObject(s);
+            oos.flush();
+         }
+         catch(IOException ioe)
+         {
+            System.err.println(ioe.toString());
+         }
       }
       
       /**
@@ -756,7 +785,8 @@ public class ConnectFive extends JFrame implements ActionListener
                   }
                   else if(inpObj instanceof String)
                   {
-                     //Chat client stuff
+                     String mes=(String)inpObj;
+                     jtaChat.append("\n+"+mes+"\n");
                   }
                }
                catch(ClassNotFoundException cnfe)
