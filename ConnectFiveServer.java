@@ -99,7 +99,7 @@ public class ConnectFiveServer
                {
                   C5Pair temp = (C5Pair)inpObj;
                   currentGameboard = temp.getGameBoard();
-                  if(temp.getNextPlayer() != 'w' || temp.getNextPlayer() != 't')
+                  if(temp.getNextPlayer() != 'w' || temp.getNextPlayer() != 't') //w = win, t = tie
                   {
                      currentPlayer = temp.getNextPlayer();
                   }
