@@ -27,10 +27,12 @@ public class ConnectFive extends JFrame implements ActionListener
    JButton jbNine = null;
    JPanel jpCenter = null;
    
+   JFrame connection = null;
    String ipAddress = "";
    JLabel connectServer = null;
    JTextField serverIP = null;
    JButton connectToServer = null;
+   boolean isConnected = false;
    
    private static int redWins = 0;
    private static int blueWins = 0;
@@ -61,7 +63,7 @@ public class ConnectFive extends JFrame implements ActionListener
       serverIP = new JTextField(25);
       connectToServer = new JButton("Connect");
       
-      JFrame connection = new JFrame();
+      connection = new JFrame();
       
       connection.setLayout( new FlowLayout(FlowLayout.CENTER));
       connection.add(connectServer);
@@ -444,6 +446,16 @@ public class ConnectFive extends JFrame implements ActionListener
       //serverIP is the JTextField
       ipAddress = serverIP.getText();
       
+//       if()
+//       {
+//          isConnected = true;
+//       }
+      
+      if(isConnected == true)
+      {
+         setVisible(true);
+         connection.setVisible(false);
+      }
       
     }
      
