@@ -58,7 +58,7 @@ public class ConnectFive extends JFrame implements ActionListener
    // stuff for chat client
    private JButton jbSetUserName=new JButton("Set User Name"); 
    private JTextArea jtaChat=new JTextArea(25, 15);
-   private JTextArea jtasend=new JTextArea(3,15);
+   private JTextArea jtaSend=new JTextArea(3,15);
    private JTextField jtfName=new JTextField(20);
    private JButton jbSend=new JButton("send");
    /**
@@ -116,13 +116,29 @@ public class ConnectFive extends JFrame implements ActionListener
          jpCenter.add(spot);
          slots.add(spot);
       }
+      // creates the japenls
       JPanel jpChat=new JPanel(new BorderLayout());
       JPanel jpName=new JPanel(new FlowLayout(FlowLayout.CENTER));
+      JPanel jpSend=new JPanel(new BorderLayout());
+      
+      // creates on with the stuff to 
       jpName.add(new JLabel("Set UserName:"));
       jpName.add(jtfName);
       jpName.add(jbSetUserName);
-      jpChat.add(jpName);
+      jpChat.add(jpName,BorderLayout.NORTH);
+      // added the textfield to display chat
+      jtaChat.setEditable(false);
+      jtaChat.setLineWrap(true);
+      
+      jpChat.add(new JScrollPane(jtaChat));
+      jtaSend.setLineWrap(true);
+      jpSend.add(new JScrollPane(jtaSend));
+      jpSend.add(jbSend,BorderLayout.SOUTH);
+      jpChat.add(jpSend,BorderLayout.SOUTH);
+      jbSend.setEnabled(false);
+      jtaSend.setEnabled(false);
       add(jpChat , BorderLayout.EAST);
+      
       
    }
    
