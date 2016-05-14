@@ -52,13 +52,14 @@ public class ConnectFive extends JFrame implements ActionListener
    // adds
    ArrayList<Slot> slots = new ArrayList<Slot>();
    
-   ConnectFiveBackEnd backEnd = new ConnectFiveBackEnd();
+   ConnectFiveBackEnd backEnd =null;
    // stuff for chat client
    private JButton jbSetUserName=new JButton("Set User Name"); 
    private JTextArea jtaChat=new JTextArea(25, 15);
    private JTextArea jtaSend=new JTextArea(3,15);
    private JTextField jtfName=new JTextField(20);
    private JButton jbSend=new JButton("send");
+   private String name=null;
    /**
     * Constructor for Connect Five game. Sets up GUI, and sets all spots to default color
     */
@@ -234,6 +235,12 @@ public class ConnectFive extends JFrame implements ActionListener
       {
          buttonConnect();
       }
+      else if(cmd.equalsIgnoreCase("set User Name")){
+         name=jtfName.getText();
+         jtaSend.setEnabled(true);
+         jbSend.setEnabled(false);
+      }
+         
 
       placedPieces++;
       if(validOrWin == 2) //Checks if there is a winner
@@ -478,6 +485,7 @@ public class ConnectFive extends JFrame implements ActionListener
     {
       //serverIP is the JTextField
       ipAddress = serverIP.getText();
+      backEnd=new ConnectFiveBackEnd();
       
       if(isConnected == true)
       {
