@@ -28,7 +28,7 @@ public class ConnectFive extends JFrame implements ActionListener
    JPanel jpCenter = null;
    
    JFrame connection = null;
-   String ipAddress = "";
+   String ipAddress = null;
    JLabel connectServer = null;
    JTextField serverIP = null;
    JButton connectToServer = null;
@@ -157,6 +157,8 @@ public class ConnectFive extends JFrame implements ActionListener
       jbSend.setEnabled(false);
       jtaSend.setEnabled(false);
       add(jpChat , BorderLayout.EAST);
+      jbSetUserName.addActionListener(this);
+      jbSend.addActionListener(this);
       
       
    }
@@ -245,13 +247,15 @@ public class ConnectFive extends JFrame implements ActionListener
          buttonConnect();
          placedPieces++;
       }
-      else if(cmd.equalsIgnoreCase("set User Name")){
+      else if(cmd.equalsIgnoreCase("set user name")){
          name=jtfName.getText();
          jtaSend.setEnabled(true);
-         jbSend.setEnabled(false);
+         jbSend.setEnabled(true);
+         revalidate();
+         repaint();
       }
       else if(cmd.equalsIgnoreCase("send")){
-         backEnd.sendString(name+jtaSend.getText());
+         backEnd.sendString(name+"; "+jtaSend.getText());
          jtaSend.setText("");
       }
          
@@ -786,7 +790,7 @@ public class ConnectFive extends JFrame implements ActionListener
                   else if(inpObj instanceof String)
                   {
                      String mes=(String)inpObj;
-                     jtaChat.append("\n+"+mes+"\n");
+                     jtaChat.append("\n"+mes+"\n");
                   }
                }
                catch(ClassNotFoundException cnfe)
