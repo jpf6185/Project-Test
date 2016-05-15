@@ -250,7 +250,7 @@ public class ConnectFive extends JFrame implements ActionListener
       else if(cmd.equalsIgnoreCase("set User Name")){
          name=jtfName.getText();
          jtaSend.setEnabled(true);
-         jbSend.setEnabled(false);
+         jbSend.setEnabled(true);
       }
       else if(cmd.equalsIgnoreCase("send")){
          backEnd.sendString(name+jtaSend.getText());
