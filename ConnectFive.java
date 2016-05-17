@@ -164,6 +164,11 @@ public class ConnectFive extends JFrame implements ActionListener
       
       
    }
+   // method to allow the listener to repaint the client
+   public void rePaintClient(){
+      repaint();
+      revalidate();
+   }
    
    /**
     * Main method for ConnectFive game
@@ -512,6 +517,8 @@ public class ConnectFive extends JFrame implements ActionListener
          setVisible(true);
          connection.setVisible(false);
       }
+
+      
       
     }
      
@@ -529,9 +536,7 @@ public class ConnectFive extends JFrame implements ActionListener
       
       char currentPlayer = 'r';
       ObjectOutputStream oos = null;
-      ObjectInputStream ois = null;
-      Object syn=new Object();
-      
+      ObjectInputStream ois = null;      
       /**
        * Constructor for Back End
        * Called when creating first game, and when a game resets
@@ -546,6 +551,7 @@ public class ConnectFive extends JFrame implements ActionListener
             oos.flush();
             ois = new ObjectInputStream(clientSocket.getInputStream());
             playerColor = (char)ois.readObject();
+            isConnected = true;
          }
          catch(ClassNotFoundException cnfe)
          {
@@ -554,12 +560,14 @@ public class ConnectFive extends JFrame implements ActionListener
          catch(UnknownHostException uhe)
          {
             System.err.println(uhe.toString());
+            JOptionPane.showMessageDialog(null,"invalid host name");
          }
          catch(IOException ioe)
          {
             System.err.println(ioe.toString());
+            JOptionPane.showMessageDialog(null,ioe.toString());
          }
-         isConnected = true;
+         
          Thread c5lt = new Thread(new C5ListenThread());
          c5lt.start();
       }
